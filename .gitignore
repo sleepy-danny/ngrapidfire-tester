@@ -1,0 +1,38 @@
+# Object files
+*.o
+*.elf
+*.ihx
+*.rel
+*.lst
+*.rst
+
+# Libraries
+*.a
+*.so
+
+# autoconf's cache
+autom4te.cache
+aclocal.m4
+configure
+config.*
+
+# Config
+Makefile.config
+
+# generated build files
+*.c1
+*.c2
+*.pal
+rom
+assets/*.bmp
+assets/*.png
+sprites
+samples
+
+# gngeo log file on MinGW/MSYS2
+gngeo_log.txt
+
+# Editors tmp
+*~
+\#*#
+.#*
