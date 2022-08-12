@@ -22,7 +22,7 @@ include ../Makefile.config
 include ../Makefile.common
 $(CART): $(PROM) $(CROM1) $(CROM2) $(SROM) $(VROM) $(MROM) | rom
 
-OBJS=main
+OBJS=main rftester
 ELF=rom.elf
 FIX_ASSETS=$(ASSETS)/rom/s1-shadow.bin
 

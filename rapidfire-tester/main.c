@@ -1,20 +1,23 @@
 #include <ngdevkit/neogeo.h>
-#include <ngdevkit/ng-fix.h>
-#include <stdio.h>
+#include "rftester.h"
+
+volatile u16 vblank = 0;
+void rom_callback_VBlank() {
+    vblank = 1;
+    rftester_vblank_cb();
+}
+
+void ng_wait_vblank() {
+    while (!vblank);
+    vblank = 0;
+}
 
 int main(void) {
-    ng_cls();
+    rftester_init();
 
-    // Set up a minimal palette
-    const u16 palette[]={0x8000, 0x0fff, 0x0555};
-    for (u16 i=0; i<3; i++) {
-        MMAP_PALBANK1[i]=palette[i];
+    while (1) {
+        rftester_process_state();
     }
-
-    const char hello[] = "Hello world!";
-    ng_text(2, 13, 0, hello);
-
-    while (1);
     return 0;
 }
 
