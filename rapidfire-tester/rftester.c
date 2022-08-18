@@ -2,6 +2,7 @@
 #include <ngdevkit/ng-fix.h>
 #include <ngdevkit/ng-video.h>
 #include <stdio.h>
+#include "version.h"
 
 typedef enum {
     RFTESTER_STATE_IDLE,
@@ -40,15 +41,18 @@ void rftester_vblank_cb(void) {
 void rftester_print_info(void) {
     ng_cls();
 
+    char str[30];
     const u16 col = 2;
     u16 row = 3;
     ng_text(col, row++, 0, "Rapid fire tester");
+
+    snprintf(str, sizeof(str), " build %s", VERSION);
+    ng_text(col, row++, 0, str);
 
     row = 22;
     ng_text(col, row++, 0, "Press any button to start count");
     ng_text(col, row++, 0, "Repeat same button until timer");
 
-    char str[30];
     snprintf(str, sizeof(str), "  reaches %u seconds", gCtx->time_limit_sec);
     ng_text(col, row++, 0, str);
     row++;

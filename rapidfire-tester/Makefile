@@ -22,9 +22,15 @@ include ../Makefile.config
 include ../Makefile.common
 $(CART): $(PROM) $(CROM1) $(CROM2) $(SROM) $(VROM) $(MROM) | rom
 
+AUTOGEN=version.h
 OBJS=main rftester
 ELF=rom.elf
 FIX_ASSETS=$(ASSETS)/rom/s1-shadow.bin
+
+version.h:
+	git show -s --format=format:"%ct" | awk '{print "#define VERSION \"" strftime("%Y.%m.%d", $$0) "\""}' > $@
+
+$(OBJS:%=%.c): $(AUTOGEN)
 
 $(ASSETS)/rom/c1.bin $(ASSETS)/rom/s1.bin:
 	$(MAKE) -C $(ASSETS)
@@ -60,6 +66,6 @@ $(PROM): $(ELF) | rom
 	$(M68KOBJCOPY) -O binary -S -R .comment $< $@ && dd if=$@ of=$@ conv=notrunc,swab
 
 clean:
-	rm -f *.png *.o *~ $(ELF) tmp.* rom/*.*
+	rm -f *.png *.o *~ $(ELF) tmp.* rom/*.* $(AUTOGEN)
 
 .PHONY: clean
