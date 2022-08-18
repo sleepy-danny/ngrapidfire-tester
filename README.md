@@ -43,9 +43,12 @@ the timer. Hits to the same button will be counted while the timer counts to
 10 seconds, and all other buttons are ignored. At the end of 10 seconds, the
 total button hits will be displayed.
 
+![image](preview.png)
+
 ## Notes
 - This program was only tested on an Neo Geo AES (NTSC Japan factory BIOS)
 - START and SELECT buttons not supported at the moment
+- Anything faster than 30 hits per second will not count correctly
 - Mahjong controller is not supported
 
 ## Acknowledgement
